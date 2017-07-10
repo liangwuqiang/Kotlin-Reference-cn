@@ -14,11 +14,13 @@ Kotlin has three structural jump expressions:
 Kotlin有三种结构跳转表达式：
 
 * *return*{: .keyword }. By default returns from the nearest enclosing function or [anonymous function](lambdas.md#anonymous-functions).
-* return. 默认情况下，从所在封闭的函数或 [匿名函数](lambdas.md#anonymous-functions)中跳转出来。
+* 关键字return. 默认情况下，从最近的封闭函数或 [匿名函数](lambdas.md#anonymous-functions)中返回。
+
 * *break*{: .keyword }. Terminates the nearest enclosing loop.
-* break. 从所在封闭的循环中跳转出来。
+* 关键字break. 从最近的封闭循环结束。
+
 * *continue*{: .keyword }. Proceeds to the next step of the nearest enclosing loop.
-* continue. 从所在封闭循环中，忽略后面的代码，直接执行下一次循环。
+* 关键字continue. 从最近的封闭循环中，直接跳到下一次。
 
 All of these expressions can be used as part of larger expressions:
 
