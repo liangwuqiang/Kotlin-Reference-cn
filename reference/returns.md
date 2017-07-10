@@ -1,5 +1,3 @@
-（翻译不好，理解费劲，以后再修改）
-
 ---
 type: doc
 layout: reference
@@ -7,7 +5,7 @@ category: "Syntax"
 title: "Returns and Jumps"
 ---
 
-# Returns and Jumps 返回和跳转
+# Returns and Jumps || 返回和跳转
 
 Kotlin has three structural jump expressions:
 
@@ -32,13 +30,13 @@ val s = person.name ?: return
 
 The type of these expressions is the [Nothing type](exceptions.md#the-nothing-type).
 
-这些表达式的类型是 [Nothing type](exceptions.md#the-nothing-type).
+这些表达式的类型是 [空类型](exceptions.md#the-nothing-type).
 
-## Break and Continue Labels Break和Continue标签
+## Break and Continue Labels || Break和Continue标签
 
 Any expression in Kotlin may be marked with a *label*{: .keyword }.
 
-Kotlin中的一些表达式可以用label来标记。
+Kotlin中的一些表达式可以用关键字label（标签）来标记。
 
 Labels have the form of an identifier followed by the `@` sign, 
 
@@ -60,7 +58,7 @@ loop@ for (i in 1..100) {
 
 Now, we can qualify a *break*{: .keyword } or a *continue*{: .keyword } with a label:
 
-现在，我们就可以利用标签来进行break或者continue了：
+现在，我们就可以利用标签来限定关键字break或关键字continue了：
 
 ``` kotlin
 loop@ for (i in 1..100) {
@@ -72,21 +70,21 @@ loop@ for (i in 1..100) {
 
 A *break*{: .keyword } qualified with a label jumps to the execution point right after the loop marked with that label.
 
-break具备使用标签跳转到执行点的能力，右边跟随带有标签名的循环标记。
+带有标签的关键字break被限定正好跳转到带有那个标签的循环标记后边的执行点。
 
 A *continue*{: .keyword } proceeds to the next iteration of that loop.
 
-continue进行那个循环的下次迭代。
+关键字continue会继续进行那个循环的下一回合。
 
-## Return at Labels 在标签处返回
+## Return at Labels || 在标签处返回
 
 With function literals, local functions and object expression, functions can be nested in Kotlin. 
 
-具有函数常量，局部函数和对象表达式，在Kotlin中，函数可以嵌套使用 
+在Kotlin中，使用函数常量，局部函数和对象表达式，函数之间可以被相互嵌套使用。（？）
 
 Qualified *return*{: .keyword }s allow us to return from an outer function.
  
- Qualified return允许我们从一个外部函数中返回。
+被限定的关键字return允许我们从一个外部函数中返回。
  
 The most important use case is returning from a lambda expression. Recall that when we write this:
 
@@ -103,7 +101,7 @@ fun foo() {
 
 The *return*{: .keyword }-expression returns from the nearest enclosing function, i.e. `foo`.
 
-return表达式从所在封闭的函数中返回，比如`foo`。
+关键字return表达式从最近的封闭函数中返回，比如`foo`。
 
 (Note that such non-local returns are supported only for lambda expressions passed to [inline functions](inline-functions.md).)
 
@@ -111,7 +109,7 @@ return表达式从所在封闭的函数中返回，比如`foo`。
 
 If we need to return from a lambda expression, we have to label it and qualify the *return*{: .keyword }:
 
-如果我们需要从lambda表达式中返回，我们不得不标签出来并限制return
+如果我们只需要从lambda表达式中返回，我们不得不用标签来限定关键字return：
 
 ``` kotlin
 fun foo() {
@@ -124,7 +122,7 @@ fun foo() {
 
 Now, it returns only from the lambda expression. Oftentimes it is more convenient to use implicits labels:
 
-现在，它仅从lambda表达式中返回。它通常使用隐式标签更方便：
+现在，它仅从lambda表达式中返回。通常使用隐式标签更方便：
 
 such a label has the same name as the function to which the lambda is passed.
 
@@ -158,7 +156,7 @@ fun foo() {
 
 When returning a value, the parser gives preference to the qualified return, i.e.
 
-当返回一个值时，解析器把首选项给有资格的返回（不理解），比如：
+当返回一个值时，程序优先执行被限定的return，比如：
 
 ``` kotlin
 return@a 1
@@ -167,3 +165,5 @@ return@a 1
 means "return `1` at label `@a`" and not "return a labeled expression `(@a 1)`".
 
 意思是在标签`@a`"处返回`1`，而不是返回标签表达式`(@a 1)`。
+
+（完）
