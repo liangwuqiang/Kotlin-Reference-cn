@@ -1,19 +1,15 @@
 ---
 type: doc
-类型: 文档
 layout: reference
-布局: 参考
 category: "Syntax"
-种类: "语法"
 title: "Basic Types"
-标题: "基本类型"
 ---
 
-# Basic Types 基本类型
+# Basic Types || 基本类型
 
 In Kotlin, everything is an object in the sense
  
-在Kotlin中，从某种意义来讲，什么东西都是对象（注：面向对象编程）
+在Kotlin中，从某种意义来讲，一切都是对象
 
 that we can call member functions and properties on any variable.
 
@@ -21,7 +17,7 @@ that we can call member functions and properties on any variable.
 
 Some types are built-in, because their implementation is optimized, 
 
-一些对象已经内建在系统中，因为它们已经优化好了，（不需要用户再修改）
+有些数据类型已经固化在系统中，因为它们已经优化好了，
 
 but to the user they look like ordinary classes. 
 
@@ -29,17 +25,17 @@ but to the user they look like ordinary classes.
 
 In this section we describe most of these types:
  
-本节中，我们描述了许多以下这些类型的对象： 
+在本节中，我们将来描述许多这样的数据类型： 
  
 numbers, characters, booleans and arrays.
 
-数值，字符，布尔值和数组。（这些都是对象）
+数值，字符，布尔值和数组。
 
-## Numbers 数字
+## Numbers || 数值
 
 Kotlin handles numbers in a way close to Java, 
 
-Kotlin处理`数值类型`的方法和Java相似，
+Kotlin处理数值类型的方法和Java相似，
 
 but not exactly the same. For example, 
 
@@ -47,32 +43,34 @@ but not exactly the same. For example,
 
 there are no implicit widening conversions for numbers,
  
- 数值类型没有隐式的放大转换，（不会自动转换）
+数值类型不能进行隐式的扩充式的转换，
  
 and literals are slightly different in some cases.
 
-某些情况下，有些数值常量略微不同。（不支持八进制数）
+某些情况下，有些数值名称也略有不同。
 
 Kotlin provides the following built-in types representing numbers 
 
-Kotlin提供了如下内建的数值类型
+Kotlin提供了如下固有的数值类型
 
 (this is close to Java):
 
 （和Java相似）
 
-| Type	 | 类型    | Bit width| 位宽 |
-|--------|---------|----------|------|
-| Double | 双精度  | 64       |      |
-| Float	 | 单精度  | 32       |      |
-| Long	 | 长整形  | 64       |      |
-| Int	 | 整形    | 32       |      |
-| Short	 | 短整型  | 16       |      |
-| Byte	 | 字节    | 8        |      |
+| Type	  类型    | Bit width 位宽 |
+|----------------|----------------|
+| Double  双精度  | 64             |
+| Float	  单精度  | 32             |
+| Long	  长整形  | 64             |
+| Int	  整形    | 32             |
+| Short	  短整型  | 16             |
+| Byte	  字节    | 8              |
 
 Note that characters are not numbers in Kotlin.
 
-注意，字符在Kotlin中不是数值类型
+注意，字符类型不在Kotlin数值类型中
+
+-------------------------------------------------------暂时到此
 
 ### Literal Constants 字符常量
 
