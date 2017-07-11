@@ -70,41 +70,45 @@ Note that characters are not numbers in Kotlin.
 
 注意，字符类型不在Kotlin数值类型中
 
--------------------------------------------------------暂时到此
-
-### Literal Constants 字符常量
+### Literal Constants || 特定的字符名
 
 There are the following kinds of literal constants for integral values:
 
-有以下几种用于整形值的数值常量：
+有以下几种特定字符名可用于整数值：
 
 * Decimals: `123`
 * 十进制数值：`123`
-  * Longs are tagged by a capital `L`: `123L`
-  * 长整型要标记大写`L`: `123L`
+
+* Longs are tagged by a capital `L`: `123L`
+* 长整型要标记大写`L`: `123L`
+
 * Hexadecimals: `0x0F`
 * 十六进制: `0x0F`
+
 * Binaries: `0b00001011`
 * 二进制: `0b00001011`
 
 NOTE: Octal literals are not supported.
 
-注意：不支持八进制数值。
+注意：不支持八进制的字符名。
 
 Kotlin also supports a conventional notation for floating-point numbers:
 
-Kotlin也支持传统的浮点数表示法：
+Kotlin也支持浮点数的传统表示法：
  
 * Doubles by default: `123.5`, `123.5e10`
 * 默认情况下是双精度浮点数: `123.5`, `123.5e10`
+
 * Floats are tagged by `f` or `F`: `123.5f`
 * 单精度浮点数要标记`f`或`F`: `123.5f`
  
-### Underscores in numeric literals (since 1.1) 数值常量中的下划线
+### Underscores in numeric literals (since 1.1) || 数值中的下划线
  
 You can use underscores to make number constants more readable:
 
-可以使用下划线来使得数值常量便于阅读：
+使用下划线来使得数值常量便于阅读：
+
+---------------------------------------------
 
 ``` kotlin
 val oneMillion = 1_000_000
