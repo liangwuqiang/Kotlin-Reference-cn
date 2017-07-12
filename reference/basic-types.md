@@ -108,8 +108,6 @@ You can use underscores to make number constants more readable:
 
 使用下划线来使得数值常量便于阅读：
 
----------------------------------------------
-
 ``` kotlin
 val oneMillion = 1_000_000
 val creditCardNumber = 1234_5678_9012_3456L
@@ -118,23 +116,23 @@ val hexBytes = 0xFF_EC_DE_5E
 val bytes = 0b11010010_01101001_10010100_10010010
 ```
 
-### Representation 类型的表达形式
+### Representation || 类型的表达形式
 
 On the Java platform, numbers are physically stored as JVM primitive types, 
 
-在Java平台上，数值是被作为JVM（虚拟机）基本数据类型的方式来进行物理存储的，（内存中存储区域不同）
+在Java平台上，数值是被作为JVM（虚拟机）基本数据类型以物理的方式存储，
 
 unless we need a nullable number reference (e.g. `Int?`) or generics are involved.
  
- 除非我们需要的是可空数值引用（例如 `Int?`）或涉及到泛型。
+除非我们需要到可空的数值引用（例如 `Int?`）或涉及到泛型。
 
 In the latter cases numbers are boxed.
 
-在后面的那种情况下，数值是被封装的。
+在后面的那种情况下，数值是要求被装箱的。
 
 Note that boxing of numbers does not necessarily preserve identity:
 
-注意，封装的数值不保留ID：（封装的数值会重新分配一个内存地址）
+注意，装箱的数值不保留ID：  //装箱的数值会重新分配一个内存地址
 
 ``` kotlin
 val a: Int = 10000
@@ -146,7 +144,7 @@ print(boxedA === anotherBoxedA) // !!!Prints 'false'!!!
 
 On the other hand, it preserves equality:
 
-另一方面，它保留相等：（内容上相同，存储地址不同）
+另一方面，它保留了相等的值：    //内容上相同，存储地址不同
 
 ``` kotlin
 val a: Int = 10000
@@ -156,39 +154,40 @@ val anotherBoxedA: Int? = a
 print(boxedA == anotherBoxedA) // Prints 'true'
 ```
 
-### Explicit Conversions 明确的转换
+### Explicit Conversions || 显式的转换
 
 Due to different representations, smaller types are not subtypes of bigger ones.
 
-由于类型的表达形式不同，短类型的数据并不是其长类型数据的子类。
+由于表达形式不同，短类型的数据并不是长类型数据的子类。
 
 If they were, we would have troubles of the following sort:
 
-假设有的话，我们将会遇到以下的问题：
+假设是的话，我们将会遇到以下的问题：
 
 ``` kotlin
 // Hypothetical code, does not actually compile:
-// 假想的代码，编译不能通过：
-val a: Int? = 1 // A boxed Int (java.lang.Integer) 一个Int封装
-val b: Long? = a // implicit conversion yields a boxed Long (java.lang.Long)  悄悄地转成了Long封装
-print(a == b) // Surprise! This prints "false" as Long's equals() check for other part to be Long as well
+// 假想的代码，编译就不能通过：
+val a: Int? = 1     // A boxed Int (java.lang.Integer) 一个Int装箱
+val b: Long? = a    // implicit conversion yields a boxed Long (java.lang.Long)  悄悄地转成了Long装箱
+print(a == b) 
+// Surprise! This prints "false" as Long's equals() check for other part to be Long as well
 // 奇怪! 打印出了"false"，因为Long类型的equals()检查要求其他部分也是Long类型 
 ```
 So not only identity, but even equality would have been lost silently all over the place.
 
-所以不仅是ID不同（内存地址），而且等式也同样不能成立（数值内容）
+所以，不仅是ID不同了，而且等式也不能成立。
 
 As a consequence, smaller types are NOT implicitly converted to bigger types.
 
-因此，较短类型数值不能隐式转成较长类型数据。
+因此，短类型数值不能隐式转成长类型数据。
 
 This means that we cannot assign a value of type `Byte` to an `Int` variable without an explicit conversion
 
-这意味着我们没有通过显式转换，就不能把`Byte`类型的变量直接指定为`Int`类型的变量
+这意味着我们不通过显式的转换，就不能把Byte（字节）类型的变量直接指定为Int（整形）类型的变量
 
 ``` kotlin
-val b: Byte = 1 // OK, literals are checked statically 静态地检查数值常量
-val i: Int = b // ERROR 错误
+val b: Byte = 1     // OK, literals are checked statically 静态地检查数值常量
+val i: Int = b      // ERROR 错误
 ```
 
 We can use explicit conversions to widen numbers
@@ -196,7 +195,7 @@ We can use explicit conversions to widen numbers
 我们可以使用显式转换来改变数值类型
 
 ``` kotlin
-val i: Int = b.toInt() // OK: explicitly widened 明确地转换
+val i: Int = b.toInt()      // OK: explicitly widened 显式地转换
 ```
 
 Every number type supports the following conversions:
@@ -221,25 +220,25 @@ because the type is inferred from the context,
 
 and arithmetical operations are overloaded for appropriate conversions, for example
 
-而且算术运算会为合适的转换进行重载，例如
+而且算术运算会用适当的转换进行重载，例如
 
 ``` kotlin
 val l = 1L + 3 // Long + Int => Long Long类型 + Int类型 => Long类型
 ```
 
-### Operations 运算符
+### Operations || 运算符
 
 Kotlin supports the standard set of arithmetical operations over numbers, 
 
-Kotlin在数值运算上支持算术运算的标准集
+Kotlin所有数值都支持算术运算的标准集
 
 which are declared as members of appropriate classes 
 
-它们被声明为相应的类的成员
+它们被声明为某类的成员
 
 (but the compiler optimizes the calls down to the corresponding instructions).
 
-（但是编译器优化这些调用为相应的指令）
+（但是编译器把这些调用转换成相应的指令）
 
 See [Operator overloading](operator-overloading.md).
 
@@ -247,11 +246,11 @@ See [Operator overloading](operator-overloading.md).
 
 As of bitwise operations, there're no special characters for them, 
 
-对于位操作符，没有为它们提供特别的操作符，
+对于位操作，没有为它们提供特别的字符操作符，
 
 but just named functions that can be called in infix form, for example:
 
-但是只有功能名称，可以以中缀形式被调用，例如：
+但是只有以中缀形式被调用的带名字的函数，例如：
 
 ``` kotlin
 val x = (1 shl 2) and 0x000FF000
@@ -269,11 +268,11 @@ Here is the complete list of bitwise operations (available for `Int` and `Long` 
 * `xor(bits)` – bitwise xor
 * `inv()` – bitwise inversion
 
-## Characters 字符
+## Characters || 字符
 
 Characters are represented by the type `Char`. They can not be treated directly as numbers
 
-字符是用`Char`来表示。它们不能直接作为数值来使用。
+字符是用Char(字符)来表示。它们不能直接作为数值来使用。
 
 ``` kotlin
 fun check(c: Char) {
@@ -293,7 +292,7 @@ Special characters can be escaped using a backslash.
 
 The following escape sequences are supported: `\t`, `\b`, `\n`, `\r`, `\'`, `\"`, `\\` and `\$`.
 
-下面字符序列支持转义: `\t`, `\b`, `\n`, `\r`, `\'`, `\"`, `\\` 和 `\$`.
+下面是所支持的转义字符序列: `\t`, `\b`, `\n`, `\r`, `\'`, `\"`, `\\` 和 `\$`.
 
 To encode any other character, use the Unicode escape sequence syntax: `'\uFF00'`.
 
@@ -301,43 +300,43 @@ To encode any other character, use the Unicode escape sequence syntax: `'\uFF00'
 
 We can explicitly convert a character to an `Int` number:
 
-我们可以将一个字符显式转义为一个`Int`数值
+我们可以显式转义一个字符为一个`Int`数值
 
 ``` kotlin
 fun decimalDigitValue(c: Char): Int {
     if (c !in '0'..'9')
         throw IllegalArgumentException("Out of range")
-    return c.toInt() - '0'.toInt() // Explicit conversions to numbers 显式转成数值
+    return c.toInt() - '0'.toInt()      // Explicit conversions to numbers 显式转成数值
 }
 ```
 
 Like numbers, characters are boxed when a nullable reference is needed. 
 
-像数值类型一样，需要空值引用时，字符类型就被封装起来。
+和数值一样，在需要空值引用时，字符也要装箱。
 
 Identity is not preserved by the boxing operation.
 
-ID值（内存地址）在封装后，不会保留下来。（产生了一个新的ID值）
+ID在装箱时时是不保留的。
 
-## Booleans 布尔值
+## Booleans || 布尔值
 
 The type `Boolean` represents booleans, and has two values: *true*{: .keyword } and *false*{: .keyword }.
 
-`Boolean`类型表示布尔值，它有两个值ture和false
+`Boolean`类型表示布尔值，它有两个值：ture和false
 
 Booleans are boxed if a nullable reference is needed.
 
-如果需要空值引用，布尔值就要被封装起来。
+如果需要空值引用，布尔值就需要装箱。
 
 Built-in operations on booleans include
 
-内建的布尔值操作符包括
+系统的布尔值操作符包括
 
 * `||` – lazy disjunction 逻辑或
 * `&&` – lazy conjunction 逻辑与
 * `!` - negation  取反
 
-## Arrays 数组
+## Arrays || 数组
 
 Arrays in Kotlin are represented by the `Array` class, 
 
@@ -364,7 +363,7 @@ class Array<T> private constructor() {
 
 To create an array, we can use a library function `arrayOf()`
  
-可以使用库函数`arrayOf()`来创建一个数组
+可以使用库函数`arrayOf()`来创建数组
  
 and pass the item values to it, 
 
@@ -374,11 +373,13 @@ so that `arrayOf(1, 2, 3)` creates an array [1, 2, 3].
 
 因此`arrayOf(1, 2, 3)`可以创建数组 [1, 2, 3]。
 
-Alternatively, the `arrayOfNulls()` library function can be used to create an array of a given size filled with null elements.
+Alternatively, the `arrayOfNulls()` library function can be used to create an array of 
+a given size filled with null elements.
 
 或者，使用`arrayOfNulls()`库函数来创建一个给定大小，用空元素填充的数组。
 
-Another option is to use a factory function that takes the array size and the function that can return the initial value
+Another option is to use a factory function 
+that takes the array size and the function that can return the initial value
 
 其它的选择是使用工厂函数。取得数组大小和能够返回初始值的函数， 
 
@@ -387,7 +388,8 @@ of each array element given its index:
 通过每个元素所给定它的索引值：
 
 ``` kotlin
-// Creates an Array<String> with values ["0", "1", "4", "9", "16"] 创建一个数组["0", "1", "4", "9", "16"]
+// Creates an Array<String> with values ["0", "1", "4", "9", "16"] 
+// 创建一个数组["0", "1", "4", "9", "16"]
 val asc = Array(5, { i -> (i * i).toString() })
 ```
 
@@ -401,19 +403,19 @@ Note: unlike Java, arrays in Kotlin are invariant.
 
 This means that Kotlin does not let us assign an `Array<String>`to an `Array<Any>`, 
 
-意思是Kotlin不让我们指定`Array<String>`为`Array<Any>`，
+意思是Kotlin不让我们把`Array<String>`指定为`Array<Any>`，
 
 which prevents a possible runtime failure (but you can use `Array<out Any>`, 
 
-防止可能的运行时失败（但是你可以使用`Array<out Any>`），
+这防止了可能的运行时失败（但是你可以使用`Array<out Any>`），
 
 see [Type Projections](generics.md#type-projections)).
 
-参见 [项目类型](generics.md#type-projections))。
+参见 [类型工程](generics.md#type-projections))。
 
 Kotlin also has specialized classes to represent arrays of primitive types without boxing overhead: 
 
-Kotlin也有专门的类来表示没有封装的原始类型的数组：
+Kotlin也有专门的类来表示不经过装箱的原始类型的数组：
 
 `ByteArray`,`ShortArray`, `IntArray` and so on. 
 
@@ -436,7 +438,7 @@ val x: IntArray = intArrayOf(1, 2, 3)
 x[0] = x[1] + x[2]
 ```
 
-## Strings 字符串
+## Strings || 字符串
 
 Strings are represented by the type `String`. Strings are immutable.
 
@@ -444,7 +446,7 @@ Strings are represented by the type `String`. Strings are immutable.
 
 Elements of a string are characters that can be accessed by the indexing operation: `s[i]`.
 
-字符串元素是字符，可以通过索引操作`s[i]`来访问。
+字符串元素是字符，字符可以通过索引操作`s[i]`来访问到。
 
 A string can be iterated over with a *for*{: .keyword }-loop:
 
@@ -456,13 +458,14 @@ for (c in str) {
 }
 ```
 
-### String Literals 
+### String Literals || 字符串文字
 
 Kotlin has two types of string literals: 
 
-Kotlin有两种类型的字符串
+Kotlin有两种类型的字符串文字
 
-escaped strings that may have escaped characters in them and raw strings that can contain newlines and arbitrary text. 
+escaped strings that may have escaped characters in them 
+and raw strings that can contain newlines and arbitrary text. 
 
 具有转义字符的转义字符串 和 包含换行符和任意文本的原始字符串。
 
@@ -480,7 +483,7 @@ Escaping is done in the conventional way, with a backslash.
 
 See [Characters](#characters) above for the list of supported escape sequences.
 
-参见 上面的[特性](#characters) 寻找所支持的转义清单。
+参见 上面的[字符](#characters) 寻找所支持的转义清单。
 
 A raw string is delimited by a triple quote (`"""`), 
 
@@ -488,7 +491,7 @@ A raw string is delimited by a triple quote (`"""`),
 
 contains no escaping and can contain newlines and any other characters:
 
-不包含转义词，可以包含换行符和任何其他字符：
+不包含转义词，但可以包含换行符和任何其他字符：
 
 ``` kotlin
 val text = """
@@ -497,7 +500,8 @@ val text = """
 """
 ```
 
-You can remove leading whitespace with [trimMargin()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim-margin.html) function:
+You can remove leading whitespace with 
+[trimMargin()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim-margin.html) function:
 
 你可以使用[trimMargin()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim-margin.html)函数去掉前导空格:
 
@@ -518,7 +522,7 @@ but you can choose another character and pass it as a parameter, like `trimMargi
 
 但是你可以选择其它字符，并作为参数传递，就像`trimMargin(">")`这样。
 
-### String Templates 字符串模板
+### String Templates || 字符串模板
 
 Strings may contain template expressions, i.e. 
 
@@ -548,7 +552,7 @@ val str = "$s.length is ${s.length}" // evaluates to "abc.length is 3"
 
 Templates are supported both inside raw strings and inside escaped strings.
 
-模板支持内置原始字符串和内置转义字符串两种。
+模板既支持内置于原始字符串也支持内置于转义字符串。
 
 If you need to represent a literal `$` character in a raw string (which doesn't support backslash escaping), 
 
@@ -563,3 +567,5 @@ val price = """
 ${'$'}9.99
 """
 ```
+
+(完 2017-07-12)
