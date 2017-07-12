@@ -5,13 +5,20 @@ category: "Basics"
 title: "Idioms"
 ---
 
-# Idioms
+# Idioms || 习惯用语
 
-A collection of random and frequently used idioms in Kotlin. If you have a favorite idiom, contribute it by sending a pull request.
+A collection of random and frequently used idioms in Kotlin. 
+这是一个Kotlin中有些凌乱的但频繁使用的习惯用语集。
 
-### Creating DTOs (POJOs/POCOs)
+If you have a favorite idiom, 
+如果你有喜爱的习惯用语，
 
-``` kotlin
+contribute it by sending a pull request.
+通过发送一个pull request来贡献它吧。    //Github中的一个功能
+
+### Creating DTOs (POJOs/POCOs) || 创建DTOs(POJOs/POCOs)
+
+```kotlin
 data class Customer(val name: String, val email: String)
 ```
 

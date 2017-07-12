@@ -1,10 +1,14 @@
-fun main(args: Array<String>) {
-
-    val price = """
-        ${'$'}9.99
-        """
-    println(price)
+class KotlinGetterAndSetter {
+    var name: String = "jason"
+        set(value){field = value }
+        get() = field
 }
 
-//运行结果
-//  $9.99
+fun main(args: Array<String>) {
+
+    var k = KotlinGetterAndSetter()
+    print(k.name)
+    k.name.set("lwq")
+//    print(k.name.get())
+
+}

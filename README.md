@@ -12,10 +12,10 @@
    * 07 [Coding Conventions 编码风格](reference/coding-conventions.md) 
 
 ## Basics 基础
-   * 08 [Basic Types 基本类型](reference/basic-types.md) 完成
+   * 08 [Basic Types 基本类型](reference/basic-types.md) （完成）
    * 09 [Packages 包](reference/packages.md) 完成
    * 10 [Control Flow 控制流](reference/control-flow.md) 完成
-   * 11 [Returns and Jumps 返回与跳转](reference/returns.md) 完成
+   * 11 [Returns and Jumps 返回与跳转](reference/returns.md) （完成）
 
 ### Classes And Objects 类和对象
    * 12 [Classes and Inheritance 类和继承](reference/classes.md)

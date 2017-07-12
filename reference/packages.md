@@ -1,15 +1,11 @@
 ---
 type: doc
-类型: 文档
 layout: reference
-布局: 参考
 category: "Syntax"
-分类: "语法"
 title: "Packages"
-标题: "包"
 ---
 
-# Packages 包
+# Packages || 包
 
 A source file may start with a package declaration:
 
@@ -24,6 +20,8 @@ class Goo {}
 
 // ...
 ```
+
+-----------------------
 
 All the contents (such as classes and functions) of the source file are contained by the package declared.
 
