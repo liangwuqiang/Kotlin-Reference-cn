@@ -9,11 +9,12 @@ related:
     - interfaces.md
 ---
 
-# Classes and Inheritance
+# Classes and Inheritance 类和继承
 
-## Classes
+## Classes 类
 
 Classes in Kotlin are declared using the keyword *class*{: .keyword }:
+在 Kotlin 中类用 class 声明：
 
 ``` kotlin
 class Invoice {
@@ -23,16 +24,18 @@ class Invoice {
 The class declaration consists of the class name, the class header (specifying its type parameters, the primary
 constructor etc.) and the class body, surrounded by curly braces. Both the header and the body are optional;
 if the class has no body, curly braces can be omitted.
+类的声明包含类名，类头(指定类型参数，主构造函数等等)，以及类主体，用大括号包裹。类头和类体是可选的；如果没有类体可以省略大括号。
 
 ``` kotlin
 class Empty
 ```
 
 
-### Constructors
+### Constructors 构造函数
 
 A class in Kotlin can have a **primary constructor** and one or more **secondary constructors**. The primary
 constructor is part of the class header: it goes after the class name (and optional type parameters).
+在 Kotlin 中类可以有一个主构造函数以及多个二级构造函数。主构造函数是类头的一部分：跟在类名后面(可以有可选的类型参数)。
 
 ``` kotlin
 class Person constructor(firstName: String) {
@@ -41,6 +44,7 @@ class Person constructor(firstName: String) {
 
 If the primary constructor does not have any annotations or visibility modifiers, the *constructor*{: .keyword }
 keyword can be omitted:
+如果主构造函数没有注解或可见性说明，则 constructor 关键字是可以省略：
 
 ``` kotlin
 class Person(firstName: String) {
@@ -49,6 +53,7 @@ class Person(firstName: String) {
 
 The primary constructor cannot contain any code. Initialization code can be placed
 in **initializer blocks**, which are prefixed with the *init*{: .keyword } keyword:
+主构造函数不能包含任意代码。初始化代码可以放在以 init 做前缀的初始化块内
 
 ``` kotlin
 class Customer(name: String) {
@@ -60,6 +65,7 @@ class Customer(name: String) {
 
 Note that parameters of the primary constructor can be used in the initializer blocks. They can also be used in
 property initializers declared in the class body:
+注意主构造函数的参数可以用在初始化块内，也可以用在类的属性初始化声明处：
 
 ``` kotlin
 class Customer(name: String) {
@@ -68,7 +74,7 @@ class Customer(name: String) {
 ```
 
 In fact, for declaring properties and initializing them from the primary constructor, Kotlin has a concise syntax:
-
+事实上，声明属性并在主构造函数中初始化,在 Kotlin 中有更简单的语法：
 
 ``` kotlin
 class Person(val firstName: String, val lastName: String, var age: Int) {
@@ -78,9 +84,11 @@ class Person(val firstName: String, val lastName: String, var age: Int) {
 
 Much the same way as regular properties, the properties declared in the primary constructor can be
 mutable (*var*{: .keyword }) or read-only (*val*{: .keyword }).
+像普通的属性，在主构造函数中的属性可以是可变或只读。
 
 If the constructor has annotations or visibility modifiers, the *constructor*{: .keyword } keyword is required, and
 the modifiers go before it:
+如果构造函数有注解或可见性声明，则 constructor 关键字是不可少的，并且可见性应该在前：
 
 ``` kotlin
 class Customer public @Inject constructor(name: String) { ... }
@@ -89,9 +97,10 @@ class Customer public @Inject constructor(name: String) { ... }
 For more details, see [Visibility Modifiers](visibility-modifiers.html#constructors).
 
 
-#### Secondary Constructors
+#### Secondary Constructors 二级构造函数
 
 The class can also declare **secondary constructors**, which are prefixed with *constructor*{: .keyword }:
+类也可以有二级构造函数，需要加前缀 constructor:
 
 ``` kotlin
 class Person {
@@ -104,6 +113,7 @@ class Person {
 If the class has a primary constructor, each secondary constructor needs to delegate to the primary constructor, either
 directly or indirectly through another secondary constructor(s). Delegation to another constructor of the same class
 is done using the *this*{: .keyword } keyword:
+如果类有主构造函数，每个二级构造函数都要，或直接或间接通过另一个二级构造函数代理主构造函数。在同一个类中代理另一个构造函数使用 this 关键字：
 
 ``` kotlin
 class Person(val name: String) {
@@ -116,6 +126,7 @@ class Person(val name: String) {
 If a non-abstract class does not declare any constructors (primary or secondary), it will have a generated primary
 constructor with no arguments. The visibility of the constructor will be public. If you do not want your class
 to have a public constructor, you need to declare an empty primary constructor with non-default visibility:
+如果一个非抽象类没有声明构造函数(主构造函数或二级构造函数)，它会产生一个没有参数的构造函数。构造函数是 public 。如果你不想你的类有公共的构造函数，你就得声明一个空的主构造函数：
 
 ``` kotlin
 class DontCreateMe private constructor () {
@@ -125,13 +136,16 @@ class DontCreateMe private constructor () {
 > **NOTE**: On the JVM, if all of the parameters of the primary constructor have default values, the compiler will
 > generate an additional parameterless constructor which will use the default values. This makes it easier to use
 > Kotlin with libraries such as Jackson or JPA that create class instances through parameterless constructors.
+>注意：在 JVM 虚拟机中，如果主构造函数的所有参数都有默认值，编译器会生成一个附加的无参的构造函数，这个构造函数会直接使用默认值。这使得 Kotlin 可以更简单的使用像 Jackson 或者 JPA 这样使用无参构造函数来创建类实例的库。
 >
 > ``` kotlin
 > class Customer(val customerName: String = "")
 > ```
 {:.info}
 
-### Creating instances of classes
+### Creating instances of classes 创建类的实例
+
+---------------------------------------------
 
 To create an instance of a class, we call the constructor as if it were a regular function:
 
