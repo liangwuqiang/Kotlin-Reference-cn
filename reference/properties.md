@@ -5,9 +5,9 @@ category: "Syntax"
 title: "Properties and Fields"
 ---
 
-# Properties and Fields
+# Properties and Fields 属性和字段
 
-## Declaring Properties
+## Declaring Properties 属性声明
 
 Classes in Kotlin can have properties.
 在 Kotlin 中类可以有属性，我们可以使用 var 关键字声明可变属性，或者用 val 关键字声明只读属性。
@@ -36,7 +36,7 @@ fun copyAddress(address: Address): Address {
 }
 ```
 
-## Getters and Setters
+## Getters and Setters || Getter 和 Setter 
 
 The full syntax for declaring a property is
 声明一个属性的完整语法如下：
@@ -107,7 +107,7 @@ var setterWithAnnotation: Any? = null
     @Inject set // annotate the setter with Inject
 ```
 
-### Backing Fields
+### Backing Fields 备份字段
 
 Classes in Kotlin cannot have fields. However, sometimes it is necessary to have a backing field when using custom accessors. For these purposes, Kotlin provides
 an automatic backing field which can be accessed using the `field` identifier:
@@ -134,7 +134,7 @@ val isEmpty: Boolean
     get() = this.size == 0
 ```
 
-### Backing Properties
+### Backing Properties 备用属性
 
 If you want to do something that does not fit into this "implicit backing field" scheme, you can always fall back to having a *backing property*:
 如果你想要做一些事情但不适合这种 "隐含备用字段" 方案，你可以试着用备用属性的方式：
@@ -153,7 +153,7 @@ public val table: Map<String, Int>
 In all respects, this is just the same as in Java since access to private properties with default getters and setters is optimized so that no function call overhead is introduced.
 综合来讲，这些和 java 很相似，可以避免函数访问私有属性而破坏它的结构
 
-## Compile-Time Constants
+## Compile-Time Constants 编译时常量
 
 Properties the value of which is known at compile time can be marked as _compile time constants_ using the `const` modifier.
 Such properties need to fulfil the following requirements:
@@ -176,7 +176,7 @@ const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 ```
 
 
-## Late-Initialized Properties
+## Late-Initialized Properties 延迟初始化属性
 
 Normally, properties declared as having a non-null type must be initialized in the constructor.
 However, fairly often this is not convenient. For example, properties can be initialized through dependency injection,
@@ -211,11 +211,11 @@ Accessing a `lateinit` property before it has been initialized throws a special 
 being accessed and the fact that it hasn't been initialized.
 在一个延迟初始化的属性初始化前访问他,会导致一个特定异常,告诉你访问的时候值还没有初始化.
 
-## Overriding Properties
+## Overriding Properties 复写属性
 
 See [Overriding Properties](classes.html#overriding-properties)
 
-## Delegated Properties
+## Delegated Properties 代理属性
   
 The most common kind of properties simply reads from (and maybe writes to) a backing field. 
 On the other hand, with custom getters and setters one can implement any behaviour of a property.
