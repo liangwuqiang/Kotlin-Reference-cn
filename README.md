@@ -18,7 +18,7 @@
    * 11 [Returns and Jumps 返回与跳转](reference/returns.md) （完成）
 
 ### Classes And Objects 类和对象
-   * 12 [Classes and Inheritance 类和继承](reference/classes.md)
+   * 12 [Classes and Inheritance 类和继承](reference/classes.md) （完成）
    * 13 [Properties and Fields 属性和字段](reference/properties.md)
    * 14 [Interfaces 接口](reference/interfaces.md)
    * 15 [Visibility Modifiers 可见性修饰词](reference/visibility-modifiers.md)
