@@ -263,18 +263,29 @@ const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 @Deprecated(SUBSYSTEM_DEPRECATED) fun foo() { ... }  //# deprecated 弃用
 ```
 
----------------------------------------------------
 ## Late-Initialized Properties 延迟初始化属性
 
 Normally, properties declared as having a non-null type must be initialized in the constructor.
-However, fairly often this is not convenient. For example, properties can be initialized through dependency injection,
-or in the setup method of a unit test. In this case, you cannot supply a non-null initializer in the constructor,
+通常，属性声明为带有非空类型，必须在构造方法中初始化。
+
+However, fairly often this is not convenient. 
+然而， 有时候这不太方便。
+
+For example, properties can be initialized through dependency injection,
+例如，属性可以被初始化，通过依赖注入，
+
+or in the setup method of a unit test. 
+或者 在一个单元测试的安装方法中
+
+In this case, you cannot supply a non-null initializer in the constructor,
+这种情况下，你不能提供一个非空初始化，在构造方法中，
+
 but you still want to avoid null checks when referencing the property inside the body of a class.
-通常,那些被定义为拥有非空类型的属性,都需要在构造器中初始化.但有时候这并没有那么方便.例如在单元测试中,属性应该通过依赖注入进行初始化,
-或者通过一个 setup 方法进行初始化.在这种条件下,你不能在构造器中提供一个非空的初始化语句,但是你仍然希望在访问这个属性的时候,避免非空检查.
+但是你仍然想避免空值检查， 当引用类体内的属性时。
+
 
 To handle this case, you can mark the property with the `lateinit` modifier:
-为了处理这种情况,你可以为这个属性加上 `lateinit` 修饰符
+为了处理这种情况, 你可以给 这个属性 标记上 `lateinit` 修饰符
 
 ``` kotlin
 public class MyTest {
@@ -285,31 +296,54 @@ public class MyTest {
     }
 
     @Test fun test() {
-        subject.method()  // dereference directly
+        subject.method()  // dereference directly 直接废弃
     }
 }
 ```
 
-The modifier can only be used on `var` properties declared inside the body of a class (not in the primary constructor), and only
-when the property does not have a custom getter or setter. The type of the property must be non-null, and it must not be
-a primitive type.
-这个修饰符只能够被用在类的 var 类型的可变属性定义中,不能用在构造方法中.并且属性不能有自定义的 getter 和 setter访问器.这个属性的类型必须是非空的,同样也不能为一个基本类型.
+The modifier can only be used on `var` properties declared inside the body of a class 
+修饰符只能使用 在类体内的 `var` 属性声明中，
 
-Accessing a `lateinit` property before it has been initialized throws a special exception that clearly identifies the property
-being accessed and the fact that it hasn't been initialized.
-在一个延迟初始化的属性初始化前访问他,会导致一个特定异常,告诉你访问的时候值还没有初始化.
+(not in the primary constructor), 
+（不在主构造方法中），
+
+and only when the property does not have a custom getter or setter. 
+并且只有在属性没有自定义getter或者setter方法时。
+
+The type of the property must be non-null, and it must not be a primitive type.
+属性的类型必须非空， 并且必须不属于基本类型。
+
+
+Accessing a `lateinit` property before it has been initialized throws a special exception 
+访问一个 `lateinit` 属性， 在它被初始化之前， 会抛出一个异常
+
+that clearly identifies the property being accessed and the fact that it hasn't been initialized.
+清晰地指出 属性正在被访问 和 它没有被初始化的事实
 
 ## Overriding Properties 复写属性
 
 See [Overriding Properties](classes.html#overriding-properties)
+见 [复写属性](classes.html#overriding-properties)
 
 ## Delegated Properties 代理属性
   
-The most common kind of properties simply reads from (and maybe writes to) a backing field. 
+The most common kind of properties simply reads from (and maybe writes to) a backing field.
+最通常的属性类型是 简单地从一个备用的field 中读取（或者写）。
+ 
 On the other hand, with custom getters and setters one can implement any behaviour of a property.
-Somewhere in between, there are certain common patterns of how a property may work. A few examples: lazy values,
+另一方面， 使用自定义的getters和setters方法 可以实现属性的任何行为。
+
+Somewhere in between, there are certain common patterns of how a property may work. 
+介于两者之间的是， 有某种 属性可以工作的 通常的模式， 
+
+A few examples: lazy values, 
+一些例子： lazy (懒) 值
+
 reading from a map by a given key, accessing a database, notifying listener on access, etc.
-最常见的属性就是从备用属性中读（或者写）。另一方面，自定义的 getter 和 setter 可以实现属性的任何操作。有些像懒值( lazy values )，根据给定的关键字从 map 中读出，读取数据库，通知一个监听者等等，像这些操作介于 getter setter 模式之间。
+从一个map（映射）中读取，通过一个给定的key（关键值）, 访问数据库， 通知访问监听器， 等等。
+
 
 Such common behaviours can be implemented as libraries using [_delegated properties_](delegated-properties.html).
-像这样常用操作可以通过代理属性作为库来实现。更多请参看[代理属性](delegated-properties.html)。
+这样的通常的行为可以 作为库 被实现，使用[代理属性](delegated-properties.html)。
+
+（完 2017-07-14）

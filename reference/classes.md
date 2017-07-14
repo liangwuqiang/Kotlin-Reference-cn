@@ -537,4 +537,4 @@ you'll be able to call its members with the same syntax as calling static method
 using only the class name as a qualifier.
 只使用类名作为标识。
 
-（完 2017-7-13）
+（完 2017-07-13）

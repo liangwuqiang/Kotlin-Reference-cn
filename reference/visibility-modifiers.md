@@ -5,18 +5,30 @@ category: "Classes and Objects"
 title: "Visibility Modifiers"
 ---
 
-# Visibility Modifiers
+# Visibility Modifiers 可见性修饰符
 
 Classes, objects, interfaces, constructors, functions, properties and their setters can have _visibility modifiers_.
+类，对象，接口，构造方法，函数，属性和它们的setters方法 可以有 _可见性修饰符_。
+
 (Getters always have the same visibility as the property.) 
+（Getters方法总是和属性（关联的）具有相同的可见性。）
+
 There are four visibility modifiers in Kotlin: `private`, `protected`, `internal` and `public`.
+Kotlin中有四种可见性修饰符：`private`, `protected`, `internal` 和 `public`.
+
 The default visibility, used if there is no explicit modifier, is `public`.
+默认的可见性 是 `public` ，用于没有指明修饰符。
 
 Below please find explanations of these for different type of declaring scopes.
+下面请找出这些说明， 不同类型的声明作用域 
   
-## Packages
+## Packages 包
   
-Functions, properties and classes, objects and interfaces can be declared on the "top-level", i.e. directly inside a package:
+Functions, properties and classes, objects and interfaces can be declared on the "top-level", 
+函数，属性和类，对象和接口 可以在顶层上声明，
+
+i.e. directly inside a package:
+例如，直接在包内：
   
 ``` kotlin
 // file name: example.kt
@@ -26,13 +38,26 @@ fun baz() {}
 class Bar {}
 ```
 
-* If you do not specify any visibility modifier, `public` is used by default, which means that your declarations will be
-visible everywhere;
-* If you mark a declaration `private`, it will only be visible inside the file containing the declaration;
+* If you do not specify any visibility modifier, `public` is used by default, 
+    如果没有指定可见性修饰符，默认会使用 `public`
+
+    which means that your declarations will be visible everywhere;
+    意思是你的声明在任何地方都是可见的；
+    
+* If you mark a declaration `private`, 
+    如果你用 `private` 标识一个声明，
+
+    it will only be visible inside the file containing the declaration;
+    它只在包含声明的文件中是可见的；
+    
 * If you mark it `internal`, it is visible everywhere in the same [module](#modules);
+    如果你标识了 `internal`, 它在相同的[模块](#modules)内是可见的；
+
 * `protected` is not available for top-level declarations.
+    `protected` 在顶层声明中不可用。
 
 Examples:
+例子：
 
 ``` kotlin
 // file name: example.kt
@@ -46,14 +71,22 @@ public var bar: Int = 5 // property is visible everywhere
 internal val baz = 6    // visible inside the same module
 ```
 
-## Classes and Interfaces
+## Classes and Interfaces 类和接口
 
 For members declared inside a class:
+对于类内部的成员声明：
 
 * `private` means visible inside this class only (including all its members);
+    `private` 意味着只是在类内部是可见的 （包含所用成员）；
+
 * `protected` --- same as `private` + visible in subclasses too;
+    `protected` 和 `private`相同 + 在子类中也是可见的；
+
 * `internal` --- any client *inside this module* who sees the declaring class sees its `internal` members;
+    `internal` 任何 能看见类声明的 *该模块内部* 的客户可以看见它的`internal`成员；
+
 * `public` --- any client who sees the declaring class sees its `public` members.
+    `public` 任何 能看见类声明的 客户 可以看见它的`internal`成员。
 
 *NOTE* for Java users: outer class does not see private members of its inner classes in Kotlin.
 
@@ -88,7 +121,7 @@ class Unrelated(o: Outer) {
 }
 ```
 
-### Constructors
+### Constructors 构造方法
 
 To specify a visibility of the primary constructor of a class, use the following syntax (note that you need to add an
 explicit *constructor*{: .keyword } keyword):
@@ -101,12 +134,12 @@ Here the constructor is private. By default, all constructors are `public`, whic
 amounts to them being visible everywhere where the class is visible (i.e. a constructor of an `internal` class is only 
 visible within the same module).
      
-### Local declarations
+### Local declarations 局部声明
      
 Local variables, functions and classes can not have visibility modifiers.
 
 
-## Modules
+## Modules 模块
 
 The `internal` visibility modifier means that the member is visible with the same module. More specifically,
 a module is a set of Kotlin files compiled together:
