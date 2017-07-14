@@ -10,8 +10,13 @@ title: "Properties and Fields"
 ## Declaring Properties 属性声明
 
 Classes in Kotlin can have properties.
-在 Kotlin 中类可以有属性，我们可以使用 var 关键字声明可变属性，或者用 val 关键字声明只读属性。
-These can be declared as mutable, using the *var*{: .keyword } keyword or read-only using the *val*{: .keyword } keyword.
+在 Kotlin 中类可以有属性，
+
+These can be declared as mutable, using the *var*{: .keyword } keyword 
+它们可以声明为可变的，使用 *var* 关键字
+
+or read-only using the *val*{: .keyword } keyword.
+或者只读的，使用 *val* 关键字
 
 ``` kotlin
 class Address {
@@ -24,19 +29,19 @@ class Address {
 ```
 
 To use a property, we simply refer to it by name, as if it were a field in Java:
-我们可以像使用 java 中的字段那样,通过名字直接使用一个属性：
-
+为了使用一个属性， 我们可以简单地通过名字引用它， 像在 java 中的字段那样：
+----------------------------------------------
 ``` kotlin
 fun copyAddress(address: Address): Address {
-    val result = Address() // there's no 'new' keyword in Kotlin
-    result.name = address.name // accessors are called
+    val result = Address() // there's no 'new' keyword in Kotlin || Kotlin没有'new'关键字
+    result.name = address.name // accessors are called //accessors 存取器
     result.street = address.street
     // ...
     return result
 }
 ```
 
-## Getters and Setters || Getter 和 Setter 
+## Getters and Setters Getters和Setters
 
 The full syntax for declaring a property is
 声明一个属性的完整语法如下：
@@ -47,15 +52,26 @@ var <propertyName>[: <PropertyType>] [= <property_initializer>]
     [<setter>]
 ```
 
-The initializer, getter and setter are optional. Property type is optional if it can be inferred from the initializer
+The initializer, getter and setter are optional. 
+初始化语句，getter 和 setter 都是可选的。
+
+Property type is optional if it can be inferred from the initializer
+属性类型是可选的，如果它能从初始化语句中推测出来 //inferred 推测
+
+
 (or from the getter return type, as shown below).
-语法中的初始化语句，getter 和 setter 都是可选的。如果属性类型可以从初始化语句或者类的成员函数中推断出来,那么他的类型也是忽略的。
+（或从getter返回值类型，如下所示）。
 
 Examples:
+例子：
 
 ``` kotlin
-var allByDefault: Int? // error: explicit initializer required, default getter and setter implied
-var initialized = 1 // has type Int, default getter and setter
+var allByDefault: Int? 
+    // error: explicit initializer required, default getter and setter implied
+    // 错误: 需要明确的初始化语句, 暗示使用默认的getter和setter方法  //imply 暗示
+var initialized = 1 
+    // has type Int, default getter and setter
+    // 类型为Int, 使用默认的getter和setter方法
 ```
 
 The full syntax of a read-only property declaration differs from a mutable one in two ways: it starts with `val` instead of `var` and does not allow a setter:
@@ -224,4 +240,4 @@ reading from a map by a given key, accessing a database, notifying listener on a
 最常见的属性就是从备用属性中读（或者写）。另一方面，自定义的 getter 和 setter 可以实现属性的任何操作。有些像懒值( lazy values )，根据给定的关键字从 map 中读出，读取数据库，通知一个监听者等等，像这些操作介于 getter setter 模式之间。
 
 Such common behaviours can be implemented as libraries using [_delegated properties_](delegated-properties.html).
-像这样常用操作可以通过代理属性作为库来实现。更多请参看[这里](http://kotlinlang.org/docs/reference/delegated-properties.html)。
+像这样常用操作可以通过代理属性作为库来实现。更多请参看[代理属性](delegated-properties.html)。

@@ -1,39 +1,3 @@
-## 属性和字段
-### 属性声明
-
-
-```kotlin
-public class Address { 	
-	public var name: String = ...
-  	public var street: String = ...
-	public var city: String = ...
-  	public var state: String? = ...
-	public var zip: String = ...
-}
-```
-
-
-
-```kotlin
-fun copyAddress(address: Address) : Address {
-	val result = Address() //在 kotlin 中没有 new 关键字
-	result.name = address.name //accessors are called
-	result.street = address.street
-}
-```
-
-### Getter 和 Setter 
-
-
-```kotlin
-var <propertyName>: <PropertyType> [ = <property_initializer> ]
-	<getter>
-	<setter>
-```
-
-
-
-例子：
 
 ```kotlin
 var allByDefault: Int? // 错误: 需要一个初始化语句, 默认实现了 getter 和 setter 方法
