@@ -30,11 +30,15 @@ class Address {
 
 To use a property, we simply refer to it by name, as if it were a field in Java:
 为了使用一个属性， 我们可以简单地通过名字引用它， 像在 java 中的字段那样：
-----------------------------------------------
+
 ``` kotlin
 fun copyAddress(address: Address): Address {
-    val result = Address() // there's no 'new' keyword in Kotlin || Kotlin没有'new'关键字
-    result.name = address.name // accessors are called //accessors 存取器
+    val result = Address() 
+        // there's no 'new' keyword in Kotlin 
+        // Kotlin没有'new'关键字
+    result.name = address.name 
+        // accessors are called 
+        // 调用属性的存取  //# accessors 存取器
     result.street = address.street
     // ...
     return result
@@ -68,130 +72,198 @@ Examples:
 ``` kotlin
 var allByDefault: Int? 
     // error: explicit initializer required, default getter and setter implied
-    // 错误: 需要明确的初始化语句, 暗示使用默认的getter和setter方法  //imply 暗示
+    // 错误: 需要明确的初始化语句, 暗示使用默认的getter和setter方法  //# imply 暗示
 var initialized = 1 
     // has type Int, default getter and setter
     // 类型为Int, 使用默认的getter和setter方法
 ```
 
-The full syntax of a read-only property declaration differs from a mutable one in two ways: it starts with `val` instead of `var` and does not allow a setter:
-只读属性的声明语法和可变属性的声明语法相比有两点不同: 它以 val 而不是 var 开头，不允许 setter 函数：
+The full syntax of a read-only property declaration differs from a mutable one in two ways: 
+只读属性的声明完整语法 和可变属性的相比， 有两点不同: 
+
+it starts with `val` instead of `var` and does not allow a setter:
+它以`val`开头， 而不是`var`， 不允许setter方法：
 
 ``` kotlin
-val simple: Int? // has type Int, default getter, must be initialized in constructor
-val inferredType = 1 // has type Int and a default getter
+val simple: Int? 
+    // has type Int, default getter, must be initialized in constructor
+    // 类型为Int ，默认的getter方法 ，必须在构造方法中初始化
+val inferredType = 1 
+    // has type Int and a default getter
+    // 类型为Int， 默认的getter方法
 ```
+-----------
+We can write custom accessors, 
+我们可以写 自定义的属性存取方法，
 
-We can write custom accessors, very much like ordinary functions, right inside a property declaration. Here's an example of a custom getter:
-我们可以像写普通函数那样在属性声明中自定义的访问器，下面是一个自定义的 getter 的例子:
+very much like ordinary functions, 
+就像普通函数那样，
+
+right inside a property declaration. 
+属性声明
+
+Here's an example of a custom getter:
+这里是一个例子， 自定义getter方法：
 
 ``` kotlin
 val isEmpty: Boolean
-    get() = this.size == 0
+    get() = this.size == 0  //# this.size是什么作用呢？
 ```
 
 A custom setter looks like this:
-下面是一个自定义的setter:
+自定义的setter方法看起来像这个样子:
 
 ``` kotlin
 var stringRepresentation: String
-    get() = this.toString()
+    get() = this.toString()  //# this本来就是String,为什么还要.toString()呢？
     set(value) {
-        setDataFromString(value) // parses the string and assigns values to other properties
+        setDataFromString(value) 
+            // parses the string and assigns values to other properties
+            // 
     }
 ```
 
-By convention, the name of the setter parameter is `value`, but you can choose a different name if you prefer.
-为了方便起见,setter 方法的参数名是value,你也可以自己任选一个自己喜欢的名称.
+By convention, the name of the setter parameter is `value`, 
+为了方便起见, setter方法的参数名是 `value`,
+
+but you can choose a different name if you prefer.
+但是你也可以选择一个你自己喜欢的名称.
 
 Since Kotlin 1.1, you can omit the property type if it can be inferred from the getter:
-
+从Kotlin 1.1版开始， 你可以省略属性类型，如果它能被从getter方法中推测出来：
 
 ``` kotlin
-val isEmpty get() = this.size == 0  // has type Boolean
+val isEmpty get() = this.size == 0  
+    // has type Boolean
+    //  类型为Boolean
 ```
 
-If you need to change the visibility of an accessor or to annotate it, but don't need to change the default implementation,
+If you need to change the visibility of an accessor or to annotate it, 
+如果你需要改变属性存取的可见性 或对它添加注释，
+
+but don't need to change the default implementation,
+但是不需要改变默认的实现，
+
 you can define the accessor without defining its body:
-如果你需要改变一个访问器的可见性或者给它添加注解，但又不想改变默认的实现，那么你可以定义一个不带函数体的访问器:
+你可以定义属性存取，而不定义它的方法体：
 
 ``` kotlin
 var setterVisibility: String = "abc"
-    private set // the setter is private and has the default implementation
+    private set 
+        // the setter is private and has the default implementation
+        // setter是私有的，并且有默认的实现
 
 var setterWithAnnotation: Any? = null
-    @Inject set // annotate the setter with Inject
+    @Inject set 
+        // annotate the setter with Inject
+        // 使用Inject注释setter方法
 ```
 
-### Backing Fields 备份字段
+### Backing Fields 备用的 fields（字段）
 
-Classes in Kotlin cannot have fields. However, sometimes it is necessary to have a backing field when using custom accessors. For these purposes, Kotlin provides
-an automatic backing field which can be accessed using the `field` identifier:
-在 kotlin 中类不可以有字段。然而当使用自定义的访问器时有时候需要备用字段。出于这些原因 kotlin 使用 `field` 关键词提供了自动备用字段，
+Classes in Kotlin cannot have fields. 
+在kotlin中类不可以有字段。
+
+However, sometimes it is necessary to have a backing field when using custom accessors. 
+然而， 有时候必须有一个备用的字段，当我们使用自定义属性存取时。
+
+For these purposes, Kotlin provides an automatic backing field 
+出于这个目的， Kotlin 提供了一个自动的 备用 field （字段）
+
+which can be accessed using the `field` identifier:
+可以被访问， 使用 `field`标识符： 
 
 ``` kotlin
-var counter = 0 // the initializer value is written directly to the backing field
+var counter = 0 
+    // the initializer value is written directly to the backing field
+    // 初始值被直接写入 备用的 field 中
     set(value) {
         if (value >= 0) field = value
     }
 ```
 
 The `field` identifier can only be used in the accessors of the property.
-`field` 关键词只能用于属性的访问器.
+`field` 标识符只能用于属性的存取方法中.
 
-A backing field will be generated for a property if it uses the default implementation of at least one of the accessors, or if a custom accessor references it through the `field` identifier.
-编译器会检查访问器的代码,如果使用了备用字段(或者访问器是默认的实现逻辑)，就会自动生成备用字段,否则就不会.
+
+A backing field will be generated for a property 
+属性就会自动产生一个备用的 field（字段） 
+
+if it uses the default implementation of at least one of the accessors, 
+如果属性使用了默认的实现，至少一个属性存取，
+
+or if a custom accessor references it through the `field` identifier.
+或者 如果一个自定义的属性存取方法 通过 `field` 标识符 引用它（field）
+
 
 For example, in the following case there will be no backing field:
-比如下面的例子中就不会有备用字段：
+例如， 下面的情况下，就没有使用备用的字段：
 
 ``` kotlin
 val isEmpty: Boolean
     get() = this.size == 0
+    
+//# 因为使用了val,所以没有setter方法；而getter方法中，又没有使用field（字段）
 ```
 
 ### Backing Properties 备用属性
 
-If you want to do something that does not fit into this "implicit backing field" scheme, you can always fall back to having a *backing property*:
-如果你想要做一些事情但不适合这种 "隐含备用字段" 方案，你可以试着用备用属性的方式：
+If you want to do something that does not fit into this "implicit backing field" scheme, 
+如果你想做某事， 不适合这个“隐含的使用备用field”方案，
+
+you can always fall back to having a *backing property*:
+你总可以退一步去使用 *备用的属性*：
 
 ``` kotlin
 private var _table: Map<String, Int>? = null
 public val table: Map<String, Int>
     get() {
         if (_table == null) {
-            _table = HashMap() // Type parameters are inferred
+            _table = HashMap() 
+                // Type parameters are inferred
+                // 类型是推导出来的
         }
         return _table ?: throw AssertionError("Set to null by another thread")
     }
+    //# field = HashMap() ?: throw ... 这样不知道可以吗？
 ```
 
-In all respects, this is just the same as in Java since access to private properties with default getters and setters is optimized so that no function call overhead is introduced.
-综合来讲，这些和 java 很相似，可以避免函数访问私有属性而破坏它的结构
+In all respects, this is just the same as in Java since access to private properties 
+综合各方面， 这只是 和java相同的 访问私有属性的方法
+
+with default getters and setters is optimized so that no function call overhead is introduced.
+默认的getters和setters方法 已被优化， 以至于 没有函数能被从顶层引入来调用 //# 外部函数不能直接访问类属性
 
 ## Compile-Time Constants 编译时常量
 
-Properties the value of which is known at compile time can be marked as _compile time constants_ using the `const` modifier.
+Properties the value of which is known at compile time 
+在编译时就知道的属性值
+
+can be marked as _compile time constants_ using the `const` modifier.
+可以 使用 `const` 修饰符 来标记为 _编译时常量_ 。
+
 Such properties need to fulfil the following requirements:
-那些在编译时就能知道具体值的属性可以使用 `const` 修饰符标记为 *编译时常量*. 这种属性需要同时满足以下条件:
+这样的属性需要满足以下条件：
 
   * Top-level or member of an `object`
-* 在"top-level"声明的 或者 是一个object的成员(Top-level or member of an object)
+  * Top-level 或者 是一个`object`成员
+  
   * Initialized with a value of type `String` or a primitive type
-  * 以`String`或基本类型进行初始化
+  * 使用 类型`String`值 或者基本类型 初始化
+  
   * No custom getter
   * 没有自定义getter
 
 Such properties can be used in annotations:
-这种属性可以被当做注解使用:
+这样的属性可以被用于注释:
 
 ``` kotlin
 const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 
-@Deprecated(SUBSYSTEM_DEPRECATED) fun foo() { ... }
+@Deprecated(SUBSYSTEM_DEPRECATED) fun foo() { ... }  //# deprecated 弃用
 ```
 
-
+---------------------------------------------------
 ## Late-Initialized Properties 延迟初始化属性
 
 Normally, properties declared as having a non-null type must be initialized in the constructor.
