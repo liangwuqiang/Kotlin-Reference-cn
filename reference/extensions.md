@@ -5,15 +5,36 @@ category: "Syntax"
 title: "Extensions"
 ---
 
-# Extensions
+# Extensions 扩展
 
-Kotlin, similar to C# and Gosu, provides the ability to extend a class with new functionality without having to inherit from the class or use any type of design pattern such as Decorator.
+Kotlin, similar to C# and Gosu, 
+Kotlin, 与 C# 和 Gosu 相似，
+
+provides the ability to extend a class with new functionality without having to inherit from the class 
+提供了使用新的函数扩展一个类的能力，而不用从类中继承
+
+or use any type of design pattern such as Decorator.
+或者使用诸如装饰者之类的设计模式的任何类型， //# decorator 装饰者
+
+，也不使用类似装饰器这样的设计模式的情况下对指定类进行扩展。
+
+
 This is done via special declarations called _extensions_. Kotlin supports _extension functions_ and _extension properties_.
+   通过叫做 _扩展_ 的特殊声明来实现 。Kotlin支持 _扩展函数_ 和 _扩展属性_
 
-## Extension Functions
+## Extension Functions 扩展函数
 
-To declare an extension function, we need to prefix its name with a _receiver type_, i.e. the type being extended.
+To declare an extension function, 
+为了声明一个扩展函数，
+
+we need to prefix its name with a _receiver type_, 
+我们需要给名字前缀一个 _接受者类型_ ,
+
+i.e. the type being extended.
+例如，被扩展的类型。
+
 The following adds a `swap` function to `MutableList<Int>`:
+下面添加一个 `swap` 函数到 `MutableList<Int>`类中 :
 
 ``` kotlin
 fun MutableList<Int>.swap(index1: Int, index2: Int) {
@@ -23,8 +44,14 @@ fun MutableList<Int>.swap(index1: Int, index2: Int) {
 }
 ```
 
-The *this*{: .keyword } keyword inside an extension function corresponds to the receiver object (the one that is passed before the dot). 
+The *this*{: .keyword } keyword inside an extension function corresponds to the receiver object 
+扩展函数内部的 *this* 关键字 对应于接收对象
+
+(the one that is passed before the dot).
+ （就是在圆点之前的那部分）
+ 
 Now, we can call such a function on any `MutableList<Int>`:
+现在，我们可以调用这个函数，在任何使用`MutableList<Int>`的地方:
 
 ``` kotlin
 val l = mutableListOf(1, 2, 3)
@@ -32,6 +59,7 @@ l.swap(0, 2) // 'this' inside 'swap()' will hold the value of 'l'
 ```
 
 Of course, this function makes sense for any `MutableList<T>`, and we can make it generic:
+当然， 这个函数感觉上和使用任何`MutableList<T>`一样， 我们可以使它变得通用：
 
 ``` kotlin
 fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
@@ -41,9 +69,16 @@ fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
 }
 ```
 
-We declare the generic type parameter before the function name for it to be available in the receiver type expression. 
-See [Generic functions](generics.html).
+We declare the generic type parameter before the function name for it 
+我们 在函数名之前 声明通用的类型参数
 
+to be available in the receiver type expression. 
+使它成为可见的， 在接收类型表达式中
+
+See [Generic functions](generics.html).
+见 [通用的函数](generics.html)。
+
+-------------------------------------------------
 ## Extensions are resolved **statically**
 
 Extensions do not actually modify classes they extend. By defining an extension, you do not insert new members into a class,

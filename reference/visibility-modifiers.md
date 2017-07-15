@@ -89,17 +89,24 @@ For members declared inside a class:
     `public` 任何 能看见类声明的 客户 可以看见它的`internal`成员。
 
 *NOTE* for Java users: outer class does not see private members of its inner classes in Kotlin.
+注意，（针对Java用户），在Kotlin中，外层类不可见内层类的私有成员。
 
-If you override a `protected` member and do not specify the visibility explicitly, the overriding member will also have `protected` visibility.
+If you override a `protected` member and do not specify the visibility explicitly, 
+如果你复写一个 `protected`成员 并 不明确指定可见性，
+
+the overriding member will also have `protected` visibility.
+复写成员也会有 `protectec` 可见性。
+ 
  
 Examples:
+例子：
 
 ``` kotlin
 open class Outer {
     private val a = 1
     protected open val b = 2
     internal val c = 3
-    val d = 4  // public by default
+    val d = 4  // public by default 默认为public
     
     protected class Nested {
         public val e: Int = 5
@@ -123,27 +130,46 @@ class Unrelated(o: Outer) {
 
 ### Constructors 构造方法
 
-To specify a visibility of the primary constructor of a class, use the following syntax (note that you need to add an
-explicit *constructor*{: .keyword } keyword):
+To specify a visibility of the primary constructor of a class, 
+为了指定一个类的主构造方法的可见性，
+
+use the following syntax 
+使用下面的语法
+
+(note that you need to add an explicit *constructor*{: .keyword } keyword):
+（注意，你需要添加明确的 *constructor* 关键字）：
 
 ``` kotlin
 class C private constructor(a: Int) { ... }
 ```
 
-Here the constructor is private. By default, all constructors are `public`, which effectively
-amounts to them being visible everywhere where the class is visible (i.e. a constructor of an `internal` class is only 
-visible within the same module).
+Here the constructor is private. 
+这里的构造方法是私有的。
+
+By default, all constructors are `public`, 
+默认情况下，所有的构造方式都是 `public`,
+
+which effectively amounts to them being visible everywhere where the class is visible 
+大多数情况下， 只要类是可见的，它们就是可见的
+
+(i.e. a constructor of an `internal` class is only visible within the same module).
+（例如，一个 `internal` 类的构造方法 只是在同一个模块中是可见的）。
      
 ### Local declarations 局部声明
      
 Local variables, functions and classes can not have visibility modifiers.
-
+局部变量，函数 和 类 不能有可见性修饰符。
 
 ## Modules 模块
 
-The `internal` visibility modifier means that the member is visible with the same module. More specifically,
-a module is a set of Kotlin files compiled together:
+The `internal` visibility modifier means that the member is visible with the same module. 
+`internal` 可见性修饰符 意味着 在同一个模块内 成员是可见的。
+
+More specifically, a module is a set of Kotlin files compiled together:
+更具体地说， 模块是一系列要编译在一起的Kotlin文件集合:
 
   * an IntelliJ IDEA module;
   * a Maven or Gradle project;
   * a set of files compiled with one invocation of the <kotlinc> Ant task.
+
+（完 2017-07-14）
