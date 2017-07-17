@@ -1,17 +1,14 @@
-import kotlin.properties.Delegates
-
-class User() {
-    var name: String by Delegates.notNull()
-
-    fun init(name: String) {
-        this.name = name
-    }
+class User(map: Map<String, Any?>) {
+    val name: String by map
+    val age: Int by map
 }
 
 
 fun main(args: Array<String>) {
-    val user = User()
-    user.init("Carl")
-    println(user.name)
+    val user = User(mapOf(
+            "name" to "John Doe",
+            "age"  to 25
+    ))
 
+    println("name = ${user.name}, age = ${user.age} ")
 }
