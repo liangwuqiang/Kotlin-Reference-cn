@@ -1,12 +1,17 @@
+import kotlin.properties.Delegates
+
+class User() {
+    var name: String by Delegates.notNull()
+
+    fun init(name: String) {
+        this.name = name
+    }
+}
+
 
 fun main(args: Array<String>) {
-    var language = if (args.size == 0) "En" else args[0]
-    println( when (language) {
-        "En" -> "Hello"
-        "Cn" -> "你好"
-        "Fr" -> "Calut"
-        "It" -> "dfs"
-        else -> "Sorry, I can't greet you in $language yet!"
-    })
+    val user = User()
+    user.init("Carl")
+    println(user.name)
 
 }
