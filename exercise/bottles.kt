@@ -24,7 +24,7 @@ fun printBottles(bottleCount: Int) {
         bottles--
         println("${bottlesOfBeer(bottles)}在墙上")
     }
-    println("墙上没有瓶子了，没有啤酒瓶了。\n去商店了买些, ${bottlesOfBeer(bottleCount)}在墙上")
+    println("墙上没有瓶子，没有啤酒瓶了。\n去商店了买些, ${bottlesOfBeer(bottleCount)}放在墙上")
 
 }
 
